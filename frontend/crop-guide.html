@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AgroPredict - Crop Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&family=Rubik+Dirt&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <nav>
+  <div class="brand">
+  <img src="assets/logo.png" alt="AgroPredict Logo" class="logo">
+  <span>AgroPredict</span>
+</div>
+    <a href="home.html">Home</a>
+    <a href="crop-guide.html" class="on">Crop Guide</a>
+    <a href="yield.html">Yield</a>
+    <a href="history.html">History</a>
+   <a class="avatar" href="profile.html" aria-label="Profile">
+  <img src="assets/user.png" alt="Profile">
+</a>
+  </nav>
+  <main class="panel">
+  <section class="screen on" id="crop">
+    <h1>Crop Guide</h1><p class="sub">Find the most suitable crop based on your soil and environmental conditions.</p>
+    <div class="form2">
+      <div class="glass"><h2>Soil Parameters</h2>
+        <div class="field"><label for="cn">Nitrogen</label><input id="cn" type="number" min="0"></div>
+        <div class="field"><label for="cp">Phosphorus</label><input id="cp" type="number" min="0"></div>
+        <div class="field"><label for="cph">Soil pH</label><input id="cph" type="number" step="0.1" min="0" max="14"></div></div>
+      <div class="glass"><h2>Weather Parameters</h2>
+        <div class="field"><label for="ct">Temperature</label><input id="ct" type="number"></div>
+        <div class="field"><label for="ch">Humidity</label><input id="ch" type="number" min="0" max="100"></div>
+        <div class="field"><label for="cr">Rainfall</label><input id="cr" type="number" min="0"></div></div>
+    </div>
+    <div class="foot"><button class="btn sm" data-do="recommend">Recommend</button></div>
+  
+  </section>
+  </main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

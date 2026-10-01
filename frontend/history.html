@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AgroPredict - History</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&family=Rubik+Dirt&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+  <nav>
+
+
+<div class="brand">
+  <img src="assets/logo.png" alt="AgroPredict Logo" class="logo">
+  <span>AgroPredict</span>
+</div>
+
+<a href="home.html">Home</a>
+<a href="crop-guide.html">Crop Guide</a>
+<a href="yield.html">Yield</a>
+<a href="history.html" class="on">History</a>
+
+<a class="avatar" href="profile.html" aria-label="Profile">
+  <img src="assets/user.png" alt="Profile">
+</a>
+
+
+  </nav>
+
+  <main class="panel">
+
+
+<section class="screen on" id="history">
+
+  <h1>Previous Prediction</h1>
+  <p class="sub">View and track your previous predictions.</p>
+
+  <div class="stats">
+
+    <div class="glass stat">
+      <h2>Crop Guide</h2>
+      <div class="dirt" id="hc">0</div>
+      <span></span>
+    </div>
+
+    <div class="glass stat">
+      <h2>Yield</h2>
+      <div class="dirt" id="hy">0</div>
+      <span></span>
+    </div>
+
+    <div class="glass stat">
+      <h2>Total</h2>
+      <div class="dirt" id="ht">0</div>
+      <span></span>
+    </div>
+
+  </div>
+
+
+  <div class="glass history-section">
+
+    <h2>Crop Recommendation History</h2>
+
+    <div id="cropHistory">
+      <p>No crop recommendations yet.</p>
+    </div>
+
+  </div>
+
+
+  <div class="glass history-section">
+
+    <h2>Yield Prediction History</h2>
+
+    <div id="yieldHistory">
+      <p>No yield predictions yet.</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+  </main>
+
+</div>
+
+<div id="historyModal" class="history-modal">
+
+  <div class="history-modal-content">
+
+
+<button class="close-modal" onclick="closeHistory()">×</button>
+
+<h2 id="modalTitle">Prediction Details</h2>
+
+<div id="modalDetails"></div>
+
+  </div>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>

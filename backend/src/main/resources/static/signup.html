@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AgroPredict - Sign up</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&family=Rubik+Dirt&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="guest">
+
+<div class="app">
+
+  <section class="screen on" style="padding:0">
+
+```
+<div class="login" style="width:100%">
+
+  <div class="glass">
+
+    <h1>Sign up</h1>
+
+    <!-- Name -->
+    <div class="f">
+      <label for="su">username</label>
+      <input
+        id="su"
+        type="text"
+        autocomplete="username"
+        placeholder="Enter your name"
+      >
+    </div>
+
+    <!-- Email -->
+    <div class="f">
+      <label for="se">email</label>
+      <input
+        id="se"
+        type="email"
+        autocomplete="email"
+        placeholder="Enter your email"
+      >
+    </div>
+
+    <!-- Password -->
+    <div class="f">
+      <label for="sp">password</label>
+      <input
+        id="sp"
+        type="password"
+        autocomplete="new-password"
+        placeholder="Enter your password"
+      >
+    </div>
+
+    <button class="btn" id="signupBtn">
+      Sign up
+    </button>
+
+    <p class="swap">
+      Already have an account ?
+      <a href="index.html">Login</a>
+    </p>
+
+    <p id="message"></p>
+
+  </div>
+
+</div>
+```
+
+  </section>
+
+</div>
+
+<script>
+
+const signupBtn = document.getElementById("signupBtn");
+
+signupBtn.addEventListener("click", async function () {
+
+    const name = document.getElementById("su").value.trim();
+    const email = document.getElementById("se").value.trim();
+    const password = document.getElementById("sp").value.trim();
+
+    const message = document.getElementById("message");
+
+    // Validation
+    if (!name || !email || !password) {
+        message.textContent = "Please fill all fields.";
+        message.style.color = "red";
+        return;
+    }
+
+    try {
+
+        const response = await fetch(
+            "http://localhost:8080/api/auth/signup",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    password: password
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (response.ok) {
+
+            message.textContent = "Signup successful!";
+            message.style.color = "green";
+
+            // Clear form
+            document.getElementById("su").value = "";
+            document.getElementById("se").value = "";
+            document.getElementById("sp").value = "";
+
+            // Go to login page
+            setTimeout(function () {
+                window.location.href = "index.html";
+            }, 1000);
+
+        } else {
+
+            message.textContent =
+                data.message || "Signup failed.";
+
+            message.style.color = "red";
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+        message.textContent =
+            "Cannot connect to server. Make sure backend is running.";
+
+        message.style.color = "red";
+    }
+
+});
+
+</script>
+
+</body>
+</html>

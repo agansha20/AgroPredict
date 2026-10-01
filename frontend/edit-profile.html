@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AgroPredict - Edit Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&family=Rubik+Dirt&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <nav>
+    <div class="brand">
+  <img src="assets/logo.png" alt="AgroPredict Logo" class="logo">
+  <span>AgroPredict</span>
+</div>
+    <a href="home.html">Home</a>
+    <a href="crop-guide.html">Crop Guide</a>
+    <a href="yield.html">Yield</a>
+    <a href="history.html">History</a>
+   <a class="avatar active" href="profile.html" aria-label="Profile">
+  <img src="assets/user.png" alt="Profile">
+</a>
+  </nav>
+  <main class="panel">
+  <section class="screen on" id="edit">
+<div class="glass profile">
+    <div class="tile">
+  <img src="assets/user.png" alt="Profile" class="profile-icon">
+</div>
+<div class="cap">Edit Profile</div>
+    <div class="erow"><label for="en">Name</label><input id="en"></div>
+    <div class="erow"><label for="ep">Phone</label><input id="ep" type="tel"></div>
+    <div class="erow"><label for="ee">Email</label><input id="ee" type="email"></div>
+    <div class="foot"><button class="btn sm" data-do="done">Done</button></div>
+  </div>
+  </section>
+  </main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

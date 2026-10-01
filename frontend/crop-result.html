@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AgroPredict - Recommendation</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&family=Rubik+Dirt&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <nav>
+    <div class="brand">
+  <img src="assets/logo.png" alt="AgroPredict Logo" class="logo">
+  <span>AgroPredict</span>
+</div>
+    <a href="home.html">Home</a>
+    <a href="crop-guide.html" class="on">Crop Guide</a>
+    <a href="yield.html">Yield</a>
+    <a href="history.html">History</a>
+    <a class="avatar" href="profile.html" aria-label="Profile">
+  <img src="assets/user.png" alt="Profile">
+</a>
+  </nav>
+  <main class="panel">
+  <section class="screen on" id="cropResult">
+<div class="glass result">
+    <h2>Your Recommendation</h2><div class="big dirt" id="cropOut">Rice</div>
+    <p>Suitable for your given soil and weather conditions.</p><button class="btn" data-go="crop">Back</button></div>
+  </section>
+  </main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

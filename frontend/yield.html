@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AgroPredict - Yield Prediction</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&family=Rubik+Dirt&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <nav>
+    <div class="brand">
+  <img src="assets/logo.png" alt="AgroPredict Logo" class="logo">
+  <span>AgroPredict</span>
+</div>
+    <a href="home.html">Home</a>
+    <a href="crop-guide.html">Crop Guide</a>
+    <a href="yield.html" class="on">Yield</a>
+    <a href="history.html">History</a>
+    <a class="avatar" href="profile.html" aria-label="Profile">
+  <img src="assets/user.png" alt="Profile">
+</a>
+  </nav>
+  <main class="panel">
+  <section class="screen on" id="yield">
+    <h1>Yield Prediction</h1><p class="sub">Estimate your expected crop yield using farm, crop and environmental data.</p>
+    <div class="glass" style="width:100%;padding:clamp(14px,2vw,28px)"><h2>Farm Details</h2>
+      <div class="form2" style="gap:0 clamp(12px,4vw,60px)">
+        <div><div class="field"><label for="yc">Crop</label><input id="yc" list="crops"><datalist id="crops"><option>Rice<option>Wheat<option>Maize<option>Cotton<option>Sugarcane<option>Potato<option>Tomato</datalist></div>
+        <div class="field"><label for="ya">Land Area</label><input id="ya" type="number" min="0" step="any"></div>
+        <div class="field"><label for="ys">Soil Type</label><input id="ys"></div></div>
+        <div><div class="field"><label for="yt">Temperature</label><input id="yt" type="number"></div>
+        <div class="field"><label for="yf">Fertilizer used</label><input id="yf" type="number" min="0"></div>
+        <div class="field"><label for="yr">Rainfall</label><input id="yr" type="number" min="0"></div></div>
+      </div></div>
+    <div class="foot"><button class="btn sm" data-do="predict">Predict</button></div>
+  
+  </section>
+  </main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

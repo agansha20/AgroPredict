@@ -1382,44 +1382,85 @@ document.addEventListener(
            ============================================ */
 
         const user =
-            getLoggedUser();
+    getLoggedUser();
 
 
-        if (user) {
+if (user) {
 
-            const nameElements =
-                document.querySelectorAll(
-                    "[data-user-name]"
-                );
-
-
-            nameElements.forEach(
-                function (element) {
-
-                    element.textContent =
-                        user.name ||
-                        "User";
-
-                }
-            );
+    const nameElements =
+        document.querySelectorAll(
+            "[data-user-name]"
+        );
 
 
-            const emailElements =
-                document.querySelectorAll(
-                    "[data-user-email]"
-                );
+    nameElements.forEach(
+        function (element) {
 
+            element.textContent =
+                user.name ||
+                "User";
 
-            emailElements.forEach(
-                function (element) {
-
-                    element.textContent =
-                        user.email ||
-                        "";
-
-                }
-            );
         }
+    );
+
+
+    const emailElements =
+        document.querySelectorAll(
+            "[data-user-email]"
+        );
+
+
+    emailElements.forEach(
+        function (element) {
+
+            element.textContent =
+                user.email ||
+                "";
+
+        }
+    );
+
+
+    /* ============================================
+       PROFILE PAGE
+       ============================================ */
+
+    const profileName =
+        $("pn");
+
+    const profileEmail =
+        $("pe");
+
+    const profilePhone =
+        $("pp");
+
+
+    if (profileName) {
+
+        profileName.textContent =
+            user.name ||
+            "";
+
+    }
+
+
+    if (profileEmail) {
+
+        profileEmail.textContent =
+            user.email ||
+            "";
+
+    }
+
+
+    if (profilePhone) {
+
+        profilePhone.textContent =
+            user.phone ||
+            "";
+
+    }
+}
 
 
         /* ============================================

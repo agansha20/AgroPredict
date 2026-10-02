@@ -1,4 +1,3 @@
-
 package com.agropredict.model;
 
 import jakarta.persistence.*;
@@ -12,6 +11,8 @@ public class User {
     private Long id;
 
     private String name;
+
+    private String phone;
 
     @Column(unique = true, nullable = false)
     private String email;
@@ -36,6 +37,16 @@ public class User {
     // Set name
     public void setName(String name) {
         this.name = name;
+    }
+
+    // Get phone
+    public String getPhone() {
+        return phone;
+    }
+
+    // Set phone
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     // Get email

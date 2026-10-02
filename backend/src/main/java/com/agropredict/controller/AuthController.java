@@ -101,4 +101,47 @@ public class AuthController {
                                 ))
                 );
     }
+        // ==============================
+    // UPDATE PROFILE
+    // ==============================
+    @PutMapping("/profile/{id}")
+    public ResponseEntity<?> updateProfile(
+            @PathVariable Long id,
+            @RequestBody User updatedUser) {
+
+        return userRepository.findById(id)
+                .map(user -> {
+
+                    if (updatedUser.getName() != null &&
+                            !updatedUser.getName().trim().isEmpty()) {
+                        user.setName(updatedUser.getName().trim());
+                    }
+
+                    if (updatedUser.getPhone() != null) {
+                        user.setPhone(updatedUser.getPhone().trim());
+                    }
+
+                    if (updatedUser.getEmail() != null &&
+                            !updatedUser.getEmail().trim().isEmpty()) {
+                        user.setEmail(updatedUser.getEmail().trim());
+                    }
+
+                    User savedUser = userRepository.save(user);
+
+                    return ResponseEntity.ok(
+                            Map.of(
+                                    "message", "Profile updated successfully",
+                                    "user", savedUser
+                            )
+                    );
+                })
+                .orElseGet(() ->
+                        ResponseEntity
+                                .badRequest()
+                                .body(Map.of(
+                                        "message",
+                                        "User not found"
+                                ))
+                );
+    }
 }

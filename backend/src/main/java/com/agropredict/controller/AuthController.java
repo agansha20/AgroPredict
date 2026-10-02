@@ -1,147 +1,109 @@
+function saveProfile() {
 
-package com.agropredict.controller;
+    const user = getLoggedUser();
 
-import com.agropredict.model.User;
-import com.agropredict.repository.UserRepository;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
-
-@RestController
-@RequestMapping("/api/auth")
-@CrossOrigin(origins = "*")
-public class AuthController {
-
-    private final UserRepository userRepository;
-
-    public AuthController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    if (!user || !user.id) {
+        alert("Please login again.");
+        go("login");
+        return;
     }
 
-    // ==============================
-    // SIGNUP
-    // ==============================
-    @PostMapping("/signup")
-    public ResponseEntity<?> signup(@RequestBody User user) {
+    const nameElement = $("en");
+    const phoneElement = $("ep");
+    const emailElement = $("ee");
 
-        if (user.getEmail() == null || user.getEmail().trim().isEmpty()) {
-            return ResponseEntity.badRequest()
-                    .body(Map.of("message", "Email is required"));
+    const name = nameElement
+        ? nameElement.value.trim()
+        : "";
+
+    const phone = phoneElement
+        ? phoneElement.value.trim()
+        : "";
+
+    const email = emailElement
+        ? emailElement.value.trim()
+        : "";
+
+    if (!name) {
+        alert("Please enter your name.");
+        return;
+    }
+
+    if (!email) {
+        alert("Please enter your email.");
+        return;
+    }
+
+    fetch(API + "/api/auth/profile/" + user.id, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            name: name,
+            phone: phone,
+            email: email
+        })
+    })
+    .then(async function (response) {
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data.message || "Profile update failed"
+            );
         }
 
-        if (user.getPassword() == null || user.getPassword().trim().isEmpty()) {
-            return ResponseEntity.badRequest()
-                    .body(Map.of("message", "Password is required"));
+        return data;
+    })
+    .then(function (data) {
+
+        // Update localStorage with latest backend user
+        if (data.user) {
+
+            localStorage.setItem(
+                "agro_user",
+                JSON.stringify(data.user)
+            );
+
+            if (data.user.id) {
+                localStorage.setItem(
+                    "userId",
+                    String(data.user.id)
+                );
+            }
+
+            store.set(
+                "name",
+                data.user.name || ""
+            );
+
+            store.set(
+                "phone",
+                data.user.phone || ""
+            );
+
+            store.set(
+                "email",
+                data.user.email || ""
+            );
         }
 
-        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-            return ResponseEntity.badRequest()
-                    .body(Map.of("message", "Email already exists"));
-        }
+        alert("Profile updated successfully!");
 
-        User savedUser = userRepository.save(user);
+        go("profile");
+    })
+    .catch(function (error) {
 
-        return ResponseEntity.ok(
-                Map.of(
-                        "message", "Signup successful",
-                        "user", savedUser
-                )
+        console.error(
+            "Profile update error:",
+            error
         );
-    }
 
-    // ==============================
-    // LOGIN
-    // ==============================
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User loginUser) {
-
-        if (loginUser.getEmail() == null ||
-                loginUser.getEmail().trim().isEmpty()) {
-
-            return ResponseEntity.badRequest()
-                    .body(Map.of("message", "Email is required"));
-        }
-
-        if (loginUser.getPassword() == null ||
-                loginUser.getPassword().trim().isEmpty()) {
-
-            return ResponseEntity.badRequest()
-                    .body(Map.of("message", "Password is required"));
-        }
-
-        return userRepository
-                .findByEmail(loginUser.getEmail().trim())
-                .map(user -> {
-
-                    if (user.getPassword() != null &&
-                            user.getPassword().equals(loginUser.getPassword())) {
-
-                        return ResponseEntity.ok(
-                                Map.of(
-                                        "message", "Login successful",
-                                        "user", user
-                                )
-                        );
-                    }
-
-                    return ResponseEntity
-                            .badRequest()
-                            .body(Map.of(
-                                    "message",
-                                    "Invalid password"
-                            ));
-                })
-                .orElseGet(() ->
-                        ResponseEntity
-                                .badRequest()
-                                .body(Map.of(
-                                        "message",
-                                        "User not found"
-                                ))
-                );
-    }
-        // ==============================
-    // UPDATE PROFILE
-    // ==============================
-    @PutMapping("/profile/{id}")
-    public ResponseEntity<?> updateProfile(
-            @PathVariable Long id,
-            @RequestBody User updatedUser) {
-
-        return userRepository.findById(id)
-                .map(user -> {
-
-                    if (updatedUser.getName() != null &&
-                            !updatedUser.getName().trim().isEmpty()) {
-                        user.setName(updatedUser.getName().trim());
-                    }
-
-                    if (updatedUser.getPhone() != null) {
-                        user.setPhone(updatedUser.getPhone().trim());
-                    }
-
-                    if (updatedUser.getEmail() != null &&
-                            !updatedUser.getEmail().trim().isEmpty()) {
-                        user.setEmail(updatedUser.getEmail().trim());
-                    }
-
-                    User savedUser = userRepository.save(user);
-
-                    return ResponseEntity.ok(
-                            Map.of(
-                                    "message", "Profile updated successfully",
-                                    "user", savedUser
-                            )
-                    );
-                })
-                .orElseGet(() ->
-                        ResponseEntity
-                                .badRequest()
-                                .body(Map.of(
-                                        "message",
-                                        "User not found"
-                                ))
-                );
-    }
+        alert(
+            error.message ||
+            "Unable to update profile."
+        );
+    });
 }

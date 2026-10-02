@@ -25,7 +25,7 @@ const PAGES = {
    API
    ================================================== */
 
-const API = "";
+const API = "https://agropredict-production.up.railway.app";
 
 
 /* ==================================================

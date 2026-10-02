@@ -1063,80 +1063,112 @@ async function predictYield() {
 
 function saveProfile() {
 
-    const fields = [
-        ["name", "en"],
-        ["phone", "ep"],
-        ["email", "ee"]
-    ];
+    const user = getLoggedUser();
 
+    if (!user || !user.id) {
+        alert("Please login again.");
+        go("login");
+        return;
+    }
 
-    fields.forEach(
-        function (item) {
+    const nameElement = $("en");
+    const phoneElement = $("ep");
+    const emailElement = $("ee");
 
-            const key =
-                item[0];
+    const name = nameElement
+        ? nameElement.value.trim()
+        : "";
 
-            const id =
-                item[1];
+    const phone = phoneElement
+        ? phoneElement.value.trim()
+        : "";
 
+    const email = emailElement
+        ? emailElement.value.trim()
+        : "";
 
-            const element =
-                $(id);
+    if (!name) {
+        alert("Please enter your name.");
+        return;
+    }
 
+    if (!email) {
+        alert("Please enter your email.");
+        return;
+    }
 
-            if (
-                element &&
-                element.value.trim()
-            ) {
+    fetch(API + "/api/auth/profile/" + user.id, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            name: name,
+            phone: phone,
+            email: email
+        })
+    })
+    .then(async function (response) {
 
-                store.set(
-                    key,
-                    element.value.trim()
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data.message || "Profile update failed"
+            );
+        }
+
+        return data;
+    })
+    .then(function (data) {
+
+        if (data.user) {
+
+            localStorage.setItem(
+                "agro_user",
+                JSON.stringify(data.user)
+            );
+
+            if (data.user.id) {
+                localStorage.setItem(
+                    "userId",
+                    String(data.user.id)
                 );
             }
 
-        }
-    );
-
-
-    const user =
-        getLoggedUser();
-
-
-    if (user) {
-
-        const name =
-            store.get(
+            store.set(
                 "name",
-                user.name || ""
+                data.user.name || ""
             );
 
+            store.set(
+                "phone",
+                data.user.phone || ""
+            );
 
-        const email =
-            store.get(
+            store.set(
                 "email",
-                user.email || ""
+                data.user.email || ""
             );
+        }
 
+        alert("Profile updated successfully!");
 
-        user.name =
-            name;
+        go("profile");
+    })
+    .catch(function (error) {
 
-
-        user.email =
-            email;
-
-
-        localStorage.setItem(
-            "agro_user",
-            JSON.stringify(user)
+        console.error(
+            "Profile update error:",
+            error
         );
-    }
 
-
-    go("profile");
+        alert(
+            error.message ||
+            "Unable to update profile."
+        );
+    });
 }
-
 
 /* ==================================================
    DOM LOADED

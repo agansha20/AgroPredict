@@ -3,55 +3,184 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>AgroPredict - Yield Prediction</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&family=Rubik+Dirt&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
 <div class="app">
+
   <nav>
+
     <div class="brand">
-  <img src="assets/logo.png" alt="AgroPredict Logo" class="logo">
-  <span>AgroPredict</span>
-</div>
+      <img src="assets/logo.png" alt="AgroPredict Logo" class="logo">
+      <span>AgroPredict</span>
+    </div>
+
     <a href="home.html">Home</a>
     <a href="crop-guide.html">Crop Guide</a>
     <a href="yield.html" class="on">Yield</a>
     <a href="history.html">History</a>
-    <a class="avatar" href="profile.html" aria-label="Profile">
-  <img src="assets/user.png" alt="Profile">
-</a>
-  </nav>
-  <main class="panel">
-  <section class="screen on" id="yield">
-    <h1>Yield Prediction</h1><p class="sub">Estimate your expected crop yield using farm, crop and environmental data.</p>
-   <div class="glass yield-card">
-    <h2>Farm Details</h2>
 
-    <div class="form2 yield-form">
-        <div><div class="field"><label for="yc">Crop</label><input id="yc" list="crops"><datalist id="crops"><option>Rice<option>Wheat<option>Maize<option>Cotton<option>Sugarcane<option>Potato<option>Tomato</datalist></div>
-        <div class="field"><label for="ya">Land Area</label><input id="ya" type="number" min="0" step="any"></div>
-       <div class="field">
-    <label for="ys">Soil Type</label>
-    <select id="ys">
-        <option value="">Select Soil Type</option>
-        <option value="Sandy">Sandy</option>
-        <option value="Clay">Clay</option>
-        <option value="Loamy">Loamy</option>
-        <option value="Silty">Silty</option>
-        <option value="Peaty">Peaty</option>
-        <option value="Chalky">Chalky</option>
-    </select>
-</div>
-        <div><div class="field"><label for="yt">Temperature</label><input id="yt" type="number"></div>
-        <div class="field"><label for="yf">Fertilizer used</label><input id="yf" type="number" min="0"></div>
-        <div class="field"><label for="yr">Rainfall</label><input id="yr" type="number" min="0"></div></div>
-      </div></div>
-    <div class="foot"><button class="btn sm" data-do="predict">Predict</button></div>
-  
-  </section>
+    <a class="avatar" href="profile.html" aria-label="Profile">
+      <img src="assets/user.png" alt="Profile">
+    </a>
+
+  </nav>
+
+
+  <main class="panel">
+
+    <section class="screen on" id="yield">
+
+      <h1>Yield Prediction</h1>
+
+      <p class="sub">
+        Estimate your expected crop yield using farm, crop and environmental data.
+      </p>
+
+
+      <div class="glass yield-card">
+
+        <h2>Farm Details</h2>
+
+
+        <div class="form2 yield-form">
+
+
+          <!-- LEFT COLUMN -->
+
+          <div>
+
+            <div class="field">
+
+              <label for="yc">Crop</label>
+
+              <input id="yc" list="crops">
+
+              <datalist id="crops">
+                <option>Rice</option>
+                <option>Wheat</option>
+                <option>Maize</option>
+                <option>Cotton</option>
+                <option>Sugarcane</option>
+                <option>Potato</option>
+                <option>Tomato</option>
+              </datalist>
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="ya">Land Area</label>
+
+              <input
+                id="ya"
+                type="number"
+                min="0"
+                step="any"
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="ys">Soil Type</label>
+
+              <select id="ys">
+
+                <option value="">Select Soil Type</option>
+
+                <option value="Sandy">Sandy</option>
+                <option value="Clay">Clay</option>
+                <option value="Loamy">Loamy</option>
+                <option value="Silty">Silty</option>
+                <option value="Peaty">Peaty</option>
+                <option value="Chalky">Chalky</option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+
+          <!-- RIGHT COLUMN -->
+
+          <div>
+
+            <div class="field">
+
+              <label for="yt">Temperature</label>
+
+              <input
+                id="yt"
+                type="number"
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="yf">Fertilizer used</label>
+
+              <input
+                id="yf"
+                type="number"
+                min="0"
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="yr">Rainfall</label>
+
+              <input
+                id="yr"
+                type="number"
+                min="0"
+              >
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      <div class="foot">
+
+        <button
+          class="btn sm"
+          data-do="predict"
+        >
+          Predict
+        </button>
+
+      </div>
+
+
+    </section>
+
   </main>
+
 </div>
+
+
 <script src="app.js"></script>
+
 </body>
 </html>

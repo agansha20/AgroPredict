@@ -31,7 +31,18 @@
     <div class="form2 yield-form">
         <div><div class="field"><label for="yc">Crop</label><input id="yc" list="crops"><datalist id="crops"><option>Rice<option>Wheat<option>Maize<option>Cotton<option>Sugarcane<option>Potato<option>Tomato</datalist></div>
         <div class="field"><label for="ya">Land Area</label><input id="ya" type="number" min="0" step="any"></div>
-        <div class="field"><label for="ys">Soil Type</label><input id="ys"></div></div>
+       <div class="field">
+    <label for="ys">Soil Type</label>
+    <select id="ys">
+        <option value="">Select Soil Type</option>
+        <option value="Sandy">Sandy</option>
+        <option value="Clay">Clay</option>
+        <option value="Loamy">Loamy</option>
+        <option value="Silty">Silty</option>
+        <option value="Peaty">Peaty</option>
+        <option value="Chalky">Chalky</option>
+    </select>
+</div>
         <div><div class="field"><label for="yt">Temperature</label><input id="yt" type="number"></div>
         <div class="field"><label for="yf">Fertilizer used</label><input id="yf" type="number" min="0"></div>
         <div class="field"><label for="yr">Rainfall</label><input id="yr" type="number" min="0"></div></div>

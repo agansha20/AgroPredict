@@ -178,27 +178,27 @@ MAIN PANEL
 ========================= */
 
 .panel {
-flex: 1;
-width: 100%;
+  flex: 1;
+  width: 100%;
 
-padding: 40px;
+  padding: 40px;
 
-position: relative;
+  position: relative;
 
-display: flex;
-flex-direction: column;
-align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-border-radius: 12px;
+  border-radius: 12px;
 
-background:
-linear-gradient(
-rgba(140, 230, 60, 0.28),
-rgba(140, 230, 60, 0.28)
-),
-var(--home) center / cover no-repeat;
+  background:
+    linear-gradient(
+      rgba(60, 130, 35, 0.12),
+      rgba(60, 130, 35, 0.12)
+    ),
+    var(--home) center / cover no-repeat;
 
-box-shadow: 0 6px 18px rgba(0, 50, 0, 0.45);
+  box-shadow: 0 6px 18px rgba(0, 50, 0, 0.45);
 }
 
 /* =========================
@@ -412,12 +412,10 @@ var(--login) center / cover no-repeat;
 }
 
 .login::before {
-content: "";
-
-position: absolute;
-inset: 0;
-
-backdrop-filter: blur(2px);
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.08);
 }
 
 .login .glass {

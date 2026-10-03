@@ -25,8 +25,10 @@
   <main class="panel">
   <section class="screen on" id="yield">
     <h1>Yield Prediction</h1><p class="sub">Estimate your expected crop yield using farm, crop and environmental data.</p>
-    <div class="glass" style="width:100%;padding:clamp(14px,2vw,28px)"><h2>Farm Details</h2>
-      <div class="form2" style="gap:0 clamp(12px,4vw,60px)">
+   <div class="glass yield-card">
+    <h2>Farm Details</h2>
+
+    <div class="form2 yield-form">
         <div><div class="field"><label for="yc">Crop</label><input id="yc" list="crops"><datalist id="crops"><option>Rice<option>Wheat<option>Maize<option>Cotton<option>Sugarcane<option>Potato<option>Tomato</datalist></div>
         <div class="field"><label for="ya">Land Area</label><input id="ya" type="number" min="0" step="any"></div>
         <div class="field"><label for="ys">Soil Type</label><input id="ys"></div></div>

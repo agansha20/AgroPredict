@@ -1117,3 +1117,42 @@ to {
     background: rgba(255, 255, 255, 0.28);
     transform: translateY(-1px);
 }
+
+/* YIELD FORM ALIGNMENT */
+
+.yield-card {
+    width: 100%;
+    padding: clamp(14px, 2vw, 28px);
+    box-sizing: border-box;
+}
+
+.yield-form {
+    width: 100%;
+    max-width: 1050px;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 0 40px;
+    box-sizing: border-box;
+}
+
+.yield-form .field {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.yield-form input,
+.yield-form select {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Mobile */
+@media (max-width: 760px) {
+    .yield-form {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}

@@ -1169,7 +1169,377 @@ function saveProfile() {
         );
     });
 }
+/* ==================================================
+   HISTORY
+   ================================================== */
 
+function formatHistoryDate(dateValue) {
+
+    if (!dateValue) {
+        return "";
+    }
+
+    const date = new Date(dateValue);
+
+    if (isNaN(date.getTime())) {
+        return "";
+    }
+
+    return date.toLocaleString();
+}
+
+
+/* ==================================================
+   LOAD HISTORY
+   ================================================== */
+
+async function loadHistory() {
+
+    const userId = getUserId();
+
+    if (!userId) {
+        console.log("No user logged in.");
+        return;
+    }
+
+
+    /* ============================================
+       CROP HISTORY
+       ============================================ */
+
+    try {
+
+        const cropResponse =
+            await fetch(
+                API + "/api/crop/history/" + userId
+            );
+
+        if (!cropResponse.ok) {
+            throw new Error(
+                "Crop history request failed"
+            );
+        }
+
+        const cropData =
+            await cropResponse.json();
+
+        const cropHistory =
+            $("cropHistory");
+
+        const cropCount =
+            $("hc");
+
+        if (cropCount) {
+            cropCount.textContent =
+                cropData.length;
+        }
+
+        if (cropHistory) {
+
+            if (
+                !cropData ||
+                cropData.length === 0
+            ) {
+
+                cropHistory.innerHTML =
+                    "<p>No crop recommendations yet.</p>";
+
+            } else {
+
+                cropHistory.innerHTML =
+                    cropData.map(function (item) {
+
+                        return `
+                            <div class="history-item"
+                                 onclick='showCropHistory(${JSON.stringify(item)})'>
+
+                                <div>
+                                    <strong>
+                                        ${item.recommendedCrop || "Unknown Crop"}
+                                    </strong>
+
+                                    <small>
+                                        ${formatHistoryDate(item.createdAt)}
+                                    </small>
+                                </div>
+
+                                <span>View</span>
+
+                            </div>
+                        `;
+
+                    }).join("");
+            }
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Crop history error:",
+            error
+        );
+    }
+
+
+    /* ============================================
+       YIELD HISTORY
+       ============================================ */
+
+    try {
+
+        const yieldResponse =
+            await fetch(
+                API + "/api/yield/history/" + userId
+            );
+
+        if (!yieldResponse.ok) {
+            throw new Error(
+                "Yield history request failed"
+            );
+        }
+
+        const yieldData =
+            await yieldResponse.json();
+
+        const yieldHistory =
+            $("yieldHistory");
+
+        const yieldCount =
+            $("hy");
+
+        if (yieldCount) {
+            yieldCount.textContent =
+                yieldData.length;
+        }
+
+        if (yieldHistory) {
+
+            if (
+                !yieldData ||
+                yieldData.length === 0
+            ) {
+
+                yieldHistory.innerHTML =
+                    "<p>No yield predictions yet.</p>";
+
+            } else {
+
+                yieldHistory.innerHTML =
+                    yieldData.map(function (item) {
+
+                        return `
+                            <div class="history-item"
+                                 onclick='showYieldHistory(${JSON.stringify(item)})'>
+
+                                <div>
+                                    <strong>
+                                        ${item.crop || "Unknown Crop"}
+                                    </strong>
+
+                                    <small>
+                                        ${formatHistoryDate(item.createdAt)}
+                                    </small>
+                                </div>
+
+                                <span>View</span>
+
+                            </div>
+                        `;
+
+                    }).join("");
+            }
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Yield history error:",
+            error
+        );
+    }
+
+
+    /* ============================================
+       TOTAL
+       ============================================ */
+
+    const totalCount =
+        $("ht");
+
+    if (totalCount) {
+
+        const cropCountValue =
+            Number(
+                $("hc")
+                    ? $("hc").textContent
+                    : 0
+            );
+
+        const yieldCountValue =
+            Number(
+                $("hy")
+                    ? $("hy").textContent
+                    : 0
+            );
+
+        totalCount.textContent =
+            cropCountValue +
+            yieldCountValue;
+    }
+}
+
+
+/* ==================================================
+   CROP HISTORY DETAILS
+   ================================================== */
+
+function showCropHistory(item) {
+
+    const modal =
+        $("historyModal");
+
+    const title =
+        $("modalTitle");
+
+    const details =
+        $("modalDetails");
+
+    if (
+        !modal ||
+        !title ||
+        !details
+    ) {
+        return;
+    }
+
+    title.textContent =
+        "Crop Recommendation";
+
+    details.innerHTML = `
+
+        <p>
+            <strong>Recommended Crop:</strong>
+            ${item.recommendedCrop || "-"}
+        </p>
+
+        <p>
+            <strong>Nitrogen:</strong>
+            ${item.nitrogen ?? "-"}
+        </p>
+
+        <p>
+            <strong>Phosphorus:</strong>
+            ${item.phosphorus ?? "-"}
+        </p>
+
+        <p>
+            <strong>pH:</strong>
+            ${item.ph ?? "-"}
+        </p>
+
+        <p>
+            <strong>Temperature:</strong>
+            ${item.temperature ?? "-"} °C
+        </p>
+
+        <p>
+            <strong>Humidity:</strong>
+            ${item.humidity ?? "-"} %
+        </p>
+
+        <p>
+            <strong>Rainfall:</strong>
+            ${item.rainfall ?? "-"} mm
+        </p>
+
+        <p>
+            <strong>Date:</strong>
+            ${formatHistoryDate(item.createdAt)}
+        </p>
+
+    `;
+
+    modal.classList.add("show");
+}
+
+
+/* ==================================================
+   YIELD HISTORY DETAILS
+   ================================================== */
+
+function showYieldHistory(item) {
+
+    const modal =
+        $("historyModal");
+
+    const title =
+        $("modalTitle");
+
+    const details =
+        $("modalDetails");
+
+    if (
+        !modal ||
+        !title ||
+        !details
+    ) {
+        return;
+    }
+
+    title.textContent =
+        "Yield Prediction";
+
+    details.innerHTML = `
+
+        <p>
+            <strong>Crop:</strong>
+            ${item.crop || "-"}
+        </p>
+
+        <p>
+            <strong>Area:</strong>
+            ${item.area ?? "-"} acres
+        </p>
+
+        <p>
+            <strong>Fertilizer:</strong>
+            ${item.fertilizer || "-"}
+        </p>
+
+        <p>
+            <strong>Rainfall:</strong>
+            ${item.rainfall ?? "-"} mm
+        </p>
+
+        <p>
+            <strong>Predicted Yield:</strong>
+            ${item.predictedYield ?? "-"} Tons
+        </p>
+
+        <p>
+            <strong>Date:</strong>
+            ${formatHistoryDate(item.createdAt)}
+        </p>
+
+    `;
+
+    modal.classList.add("show");
+}
+
+
+/* ==================================================
+   CLOSE HISTORY MODAL
+   ================================================== */
+
+function closeHistory() {
+
+    const modal =
+        $("historyModal");
+
+    if (modal) {
+        modal.classList.remove("show");
+    }
+}
 /* ==================================================
    DOM LOADED
    ================================================== */
@@ -1461,7 +1831,19 @@ if (user) {
 
     }
 }
+/* ============================================
+   HISTORY PAGE
+   ============================================ */
 
+if (
+    window.location.pathname.endsWith(
+        "history.html"
+    )
+) {
+
+    loadHistory();
+
+}
 
         /* ============================================
            RESULT VALUES

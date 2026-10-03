@@ -262,17 +262,37 @@ CROP GUIDE
 ========================= */
 
 .form2 {
-width: 100%;
-max-width: 1050px;
+  width: 100%;
+  max-width: 1050px;
 
-display: grid;
-grid-template-columns: 1fr 1fr;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 
-gap: 28px;
+  gap: 28px;
+
+  align-items: stretch;
 }
 
 .form2 .glass {
-padding: 28px;
+  width: 100%;
+  min-width: 0;
+  padding: 28px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.form2 .field {
+  width: 100%;
+}
+
+.form2 input {
+  width: 100%;
+  display: block;
+}
+
+.form2 .btn {
+  align-self: center;
 }
 
 h2 {

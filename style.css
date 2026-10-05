@@ -1068,6 +1068,10 @@ padding: 22px;
         cursor: pointer;
     }
 
+  nav.menu-open .avatar {
+    display: none;
+}
+
     nav.menu-open a:not(.avatar) {
         display: flex;
         width: 100%;

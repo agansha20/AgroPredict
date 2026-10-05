@@ -501,27 +501,44 @@ align-self: flex-start;
 }
 
 .hero h1 {
-text-align: left;
+    text-align: left;
 
-font-size: 62px;
-line-height: 1.1;
+    font-size: 62px;
+    line-height: 1.1;
+
+    color: #ffffff;
+
+    text-shadow:
+        0 3px 8px rgba(0, 0, 0, 0.75),
+        0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .hero h3 {
-margin: 18px 0 8px;
+    margin: 18px 0 8px;
 
-font-size: 28px;
+    font-size: 28px;
+    font-weight: 700;
+
+    color: #e8ffd9;
+
+    text-shadow:
+        0 3px 7px rgba(0, 0, 0, 0.75),
+        0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .hero p {
-max-width: 900px;
+    max-width: 900px;
 
-margin: 0;
+    margin: 0;
 
-font-size: 18px;
-font-weight: 500;
+    font-size: 18px;
+    font-weight: 500;
+
+    color: #ffffff;
+
+    text-shadow:
+        0 2px 6px rgba(0, 0, 0, 0.8);
 }
-
 /* =========================
 HOME CARDS
 ========================= */

@@ -1075,10 +1075,6 @@ padding: 22px;
         padding: 10px 8px;
     }
 
-    nav.menu-open .avatar {
-        display: flex;
-    }
-
     nav.menu-open .nav-login {
         background: none;
         border: none;

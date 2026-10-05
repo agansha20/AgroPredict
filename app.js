@@ -1883,3 +1883,15 @@ if (
 
     }
 );
+
+const menuToggle = document.getElementById("menuToggle");
+
+if (menuToggle) {
+    menuToggle.addEventListener("click", function () {
+        const nav = menuToggle.closest("nav");
+
+        if (nav) {
+            nav.classList.toggle("menu-open");
+        }
+    });
+}

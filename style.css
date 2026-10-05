@@ -1076,13 +1076,13 @@ padding: 22px;
 
 }
 
-    nav.menu-open a:not(.avatar) {
-        display: flex;
-        width: 100%;
-        margin-left: 0;
-        padding: 10px 8px;
-    }
-
+   nav.menu-open > a:not(.avatar) {
+    display: flex;
+    width: 100%;
+    margin-left: 0;
+    padding: 10px 8px;
+}
+  
     nav.menu-open .nav-login {
         background: none;
         border: none;

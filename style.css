@@ -1068,8 +1068,12 @@ padding: 22px;
         cursor: pointer;
     }
 
-  nav.menu-open .avatar {
-    display: none;
+  @media (max-width: 760px) {
+
+    nav.menu-open .avatar {
+        display: none !important;
+    }
+
 }
 
     nav.menu-open a:not(.avatar) {

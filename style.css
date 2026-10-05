@@ -949,13 +949,11 @@ height: 34px;
 }
 
 nav a:not(.avatar) {
-display: none;
+    display: none;
 }
 
 .avatar {
-width: 40px;
-height: 40px;
-margin-left: 10px;
+    display: none;
 }
 
 .avatar img {
@@ -1154,5 +1152,48 @@ to {
     .yield-form {
         grid-template-columns: 1fr;
         gap: 0;
+    }
+}
+.menu-toggle {
+    display: none;
+}
+
+@media (max-width: 760px) {
+
+    .menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        margin-left: auto;
+
+        width: 42px;
+        height: 42px;
+
+        border: none;
+        border-radius: 8px;
+
+        background: rgba(255, 255, 255, 0.18);
+
+        color: white;
+        font-size: 25px;
+
+        cursor: pointer;
+    }
+
+    nav {
+        flex-wrap: wrap;
+    }
+
+    nav.menu-open a:not(.avatar) {
+        display: flex;
+        width: 100%;
+        margin-left: 0;
+        padding: 10px 8px;
+    }
+
+    nav.menu-open .avatar {
+        display: flex;
+        margin-left: 0;
     }
 }
